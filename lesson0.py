@@ -1,0 +1,1 @@
+print ("Look, Ma, Non-interactive!")
