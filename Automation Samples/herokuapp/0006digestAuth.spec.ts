@@ -1,22 +1,23 @@
 import { test, expect } from '@playwright/test';
-test.use({httpCredentials : {username : 'admin', password : 'admin'}});
+//Test configurations
 
-  
+//Imports, test for the test locations and executions.
+//Imports, expect is for assertions.
+//Other possible values:
+//defineConfig, devices, ElementHandle, etc
+test.use({httpCredentials : {username : 'admin', password : 'admin'}});
+//Authentication place, for credentials. 
+
+//High Level Test Strategy:
+//Ensure that Saved credentials are sent different auth method [digest]
 test('Digsest Authentification', async ({ page }) => {
   await page.goto('https://the-internet.herokuapp.com');
 
 
-  // Click the Basic Auth link.
+  // Click the Digest Authentication link.
   await page.getByRole('link', { name: 'Digest Authentication' }).click();
-  await page.waitForTimeout(30);
-  
-
   
   await expect(page.getByRole('heading', { name: 'Digest Auth'})).toBeVisible();
-  
-  
-  
-  await page.waitForTimeout(30);
   
 
   

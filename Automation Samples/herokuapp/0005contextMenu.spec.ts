@@ -1,4 +1,13 @@
 import { test, expect } from '@playwright/test';
+//Test configurations
+
+//Imports, test for the test locations and executions.
+//Imports, expect is for assertions.
+//Other possible values:
+//defineConfig, devices, ElementHandle, etc
+
+//High Level Test Strategy:
+//ensure a pop up appears when the right button is clicked on the area. 
 test('Context Menu', async ({ page }) => {
   await page.goto('https://the-internet.herokuapp.com');
   // Click the Context Menu link.
@@ -10,5 +19,6 @@ test('Context Menu', async ({ page }) => {
 	  expect(dialog.message()).toContain('You selected a context menu');
     await dialog.accept();
   });
+ //right click with the right button on the square. 
  await page.locator('#hot-spot').click({button : 'right'});
 });

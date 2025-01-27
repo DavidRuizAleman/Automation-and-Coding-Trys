@@ -1,7 +1,14 @@
 import { test, expect } from '@playwright/test';
+//Test configurations
 
+//Imports, test for the test locations and executions.
+//Imports, expect is for assertions.
+//Other possible values:
+//defineConfig, devices, ElementHandle, etc
 
-  
+//High Level Test Strategy:
+//Create a variable to click a button a random amount of times [max 20], ensure that an element is created for each Click
+//Then create another loop to ensure that all buttons that say remove have dissapeared. 
 test('load page addRemoveelEments', async ({ page }) => {
   await page.goto('https://the-internet.herokuapp.com');
   //Get a random number to click
@@ -25,7 +32,7 @@ test('load page addRemoveelEments', async ({ page }) => {
 	await page.waitForTimeout(3);
   }
 
-  
+  //general timer delay for debugging
   await page.waitForTimeout(3);
   
 
