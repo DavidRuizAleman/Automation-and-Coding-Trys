@@ -37,7 +37,7 @@ def test_load_page_ab():
         print("The browser is about to close...")
 
         # Wait before closing the browser (if needed, consider replacing this)
-        page.wait_for_timeout(300)  # Replace sleep(300) with Playwright's built-in waiting mechanism
+        page.wait_for_timeout(300)  #debuging pause
 
         # Close the browser
         browser.close()

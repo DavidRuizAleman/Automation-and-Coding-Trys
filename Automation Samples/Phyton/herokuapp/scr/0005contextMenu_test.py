@@ -1,22 +1,25 @@
 '''
-Test 0002 Add Remove Elemnents Test
+Test 0005 ContextMenu
 '''
 #---------------------------------------------------
 # Imports
 #---------------------------------------------------
 import pytest
 from playwright.sync_api import sync_playwright
-import random
 
 @pytest.mark.smoke_test
 @pytest.mark.happy_Path
 @pytest.mark.partial_Happy
 
-def test_add_remove_elements():
+
+def test_contextMenu():
     # Arrange
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=False,slow_mo=1500)
+        
+        
         page = browser.new_page()
+        
 
         # Act
         page.goto("https://the-internet.herokuapp.com/")
@@ -24,33 +27,37 @@ def test_add_remove_elements():
         
         #pytest.set_trace()#debugging
         # Find the "A/B Testing" link and click it
-        test_name = page.locator('text=Add/Remove Elements')
+        test_name = page.locator('text=Context Menu')
         test_name.click()
-		
-	#assert
+
+        #Assert
 
         # Check the h3 text for different conditions
         h3_text = page.inner_text("h3")
-        assert h3_text == "Add/Remove Elements"
-        num = 0
-        num = int(num)
-        num = random.random() * 20
-        print(str(num) + " elements will be added")
-        add_item_button = page.locator('"Add Element"')
-
-        for i in range(0, int(num)):
-           add_item_button.click()
-           i+=1
-        for i in range(0, int(num)):
-          delete_button = page.locator('"Delete"').first
-          delete_button.click()
-          i+=1
+        assert h3_text == "Context Menu"
         
+        
+        hot_spot = page.locator("#hot-spot")
+        hot_spot.click(button="right")
+
+
+       
         
         print("The browser is about to close...")
 
         # Wait before closing the browser (if needed, consider replacing this)
-        page.wait_for_timeout(300)  #debuging pause
+        page.wait_for_timeout(300)  # #debuging pause
 
         # Close the browser
         browser.close()
+
+
+
+
+
+
+
+
+
+
+
