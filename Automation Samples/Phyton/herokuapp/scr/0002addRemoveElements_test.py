@@ -49,7 +49,7 @@ def test_add_remove_elements():
         
         print("The browser is about to close...")
 
-        # Wait before closing the browser (if needed, consider replacing this)
+        
         page.wait_for_timeout(300)  #debuging pause
 
         # Close the browser
