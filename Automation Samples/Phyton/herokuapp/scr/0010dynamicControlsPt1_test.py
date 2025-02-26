@@ -1,18 +1,18 @@
 '''
-Test 0008 Drag and Drop
+Test 0010 DynamicControls 1
 '''
 #---------------------------------------------------
 # Imports
 #---------------------------------------------------
 import pytest
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
 @pytest.mark.smoke_test
 @pytest.mark.happy_Path
 @pytest.mark.partial_Happy
 
 
-def test_drag_and_drop():
+def test_dynamic_controls_1():
     # Arrange
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False,slow_mo=1500)
@@ -25,16 +25,21 @@ def test_drag_and_drop():
         assert page.inner_text("h1") == "Welcome to the-internet"
         
         #pytest.set_trace()#debugging
-        test_name = page.locator('text=Drag and Drop')
+        test_name = page.locator('text=Dynamic Controls')
         test_name.click()
 
         #Assert
 
         # Check the h3 text for different conditions
-        h3_text = page.inner_text("h3")
-        assert h3_text == "Drag and Drop"
+        h4_text = page.inner_text("h4")
+        assert h4_text == "Dynamic Controls"
 
-        page.locator("#column-a").drag_to(page.locator("#column-b"))
+        expect(page.get_by_role('checkbox')).to_have_count(1)
+        page.locator('"Remove"').click()
+        expect(page.get_by_role('checkbox')).to_have_count(0)
+
+        page.locator('"Add"').click()
+        expect(page.get_by_role('checkbox')).to_have_count(1)
 
         print("The browser is about to close...")
         page.wait_for_timeout(300)  # #debuging pause

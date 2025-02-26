@@ -1,5 +1,5 @@
 '''
-Test 0008 Drag and Drop
+Test 0009 Dropdown
 '''
 #---------------------------------------------------
 # Imports
@@ -12,7 +12,7 @@ from playwright.sync_api import sync_playwright
 @pytest.mark.partial_Happy
 
 
-def test_drag_and_drop():
+def test_dropdown():
     # Arrange
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False,slow_mo=1500)
@@ -25,16 +25,18 @@ def test_drag_and_drop():
         assert page.inner_text("h1") == "Welcome to the-internet"
         
         #pytest.set_trace()#debugging
-        test_name = page.locator('text=Drag and Drop')
+        test_name = page.locator('text=Dropdown')
         test_name.click()
 
         #Assert
 
         # Check the h3 text for different conditions
         h3_text = page.inner_text("h3")
-        assert h3_text == "Drag and Drop"
+        assert h3_text == "Dropdown List"
 
-        page.locator("#column-a").drag_to(page.locator("#column-b"))
+        page.select_option('select#dropdown', label='Option 1')
+        page.select_option('select#dropdown', label='Option 2')
+
 
         print("The browser is about to close...")
         page.wait_for_timeout(300)  # #debuging pause
